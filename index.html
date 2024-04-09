@@ -5,23 +5,115 @@
   <title>Web Sprint 2 Challenge</title>
   <script id="challenge">
     // 👉 CHALLENGE 1
-    function profileActivation(profile, reason) {
-
+    /*
+    1. If the input profile is active, set it to inactive and assign the provided reason to the profile. The updated profile should be returned.
+    2. If the input profile is inactive, set it to active and remove the reason property from the profile. The updated profile should be returned.
+    3. If a profile passed in is active and no reason is provided, return "confirm status manually" and do not modify the profile.
+    */
+    function profileActivation(profile, reason){
+      //using an if statement to check if profile is active.
+      if(profile.active === true){
+      //another if statement to check if the reason is undefined to return a string if it is 
+        if(reason === undefined){
+          return "confirm status manually"
+      // if the reason is provided, then continue along with this statement
+        }else {
+          profile.active = false;
+          profile.reason = reason;
+        }
+      //for the second step, checking if the account is not active then go along with this statement.
+      } else {
+        profile.active = true;
+        delete profile.reason;
+      }
+      return profile;
     }
 
     // 👉 CHALLENGE 2
+    /*
+    ## Requirements
+    1. If the coordinates land on a red square ("🟥"), return `"🟥 💀"`.
+    2. If the coordinates land on a blue square ("🟦"), return `"🟦 🥳"`.
+    3. If `x` _or_ `y` is less than 1 or greater than 3, return `"invalid coordinates"`.
+    */
     function mineSweeper(grid, x, y) {
+      //This will check if the input is less than 1 or greater than 3 for both y and x coordinates.
+      if(x < 1 || x > 3 || y < 1 || y > 3){
+        return "invalid coordinates"
+      }
+      //got help for this, part, It states it'll help bring the value back to 0 after, the input for the position of grid.
+      y--
+      x--
+
+      let userInput = grid[y][x]
+      //checks if users hits the mines or didn't hit the mine.
+      if(userInput === "🟥"){
+        return "🟥 💀"
+      } else if (userInput = "🟦"){
+        return "🟦 🥳"
+      }
 
     }
+    /*
+    Transform any value of zero (0) into the boolean false.
+    Transform any value of one (1) into the boolean true.
+    If a value is null, delete the entire key-value pair from the object.
+    If any property name exceeds 9 characters, return the string "shorten all prop names to 9 chars or less".
+    */
 
     // 👉 CHALLENGE 3
     function booleanize(obj) {
-
+      //creating a variable with empty object to hold the objects.
+      let aObj = {};
+      //creating this for loop to then check if the length is greater than 9.
+      for(let i in obj){
+        if (i.length > 9){
+          return "shorten all prop names to 9 chars or less"
+        }
+      //if statements to check if obj is equal to 0, 1, and null
+        if(obj[i] === 0){
+          aObj[i] = false;
+        } else if (obj[i] === 1){
+          aObj[i] = true;
+        } else if (obj[i] !== null){
+          aObj[i] = obj[i]
+        }
+      }
+      return aObj;
     }
 
     // 👉 CHALLENGE 4
     function scrub(text, forbidden) {
+      // creating an empty string to store the results.
+      let result = "";
+      // using this to split the text by each word in the text.
+      let words = text.split(" ");
+      //console.log(words)
 
+      //in the for statement, i'm looping through each words and storing it in one variable, so one word in one varaible instead of the whole sentence in the array below.
+      for(let i = 0; i < words.length; i++){
+        let word = words[i]
+        //console.log(word)
+      
+      //creating an if statement to check if the word is one of the forbidden words.
+      if(forbidden.includes(word)){ 
+    
+        //going to use another for loop to replace each letter in the forbidden word with an marked x sign.
+        for(let j = 0; j < word.length; j++){
+          result += (`x`);
+          //console.log(result)
+          }
+        
+        } else {
+          result += word;
+        }
+        //add a space between each words
+        if(i < words.length - 1){
+          result += " ";
+        }
+      }
+      
+      return result
     }
 
     // 👉 CHALLENGE 5 (bonus, NOT graded)
